@@ -4,35 +4,35 @@ import javax.swing.JOptionPane;
 
 public class CarroInicio {
 	
-	String marca, marcaVista, cor, corVista;
-	int anoFabricacao, anoInicial, anoFinal;
+	String marca;
+	String cor;
+	int ano;
 	
-	void cadastro() {
-		marca = JOptionPane.showInputDialog("olá, informe a marca do seu veiculo: ").toUpperCase();
-		anoFabricacao = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano de fabricação do carro: "));
-		cor = JOptionPane.showInputDialog("informe a cor que era do veiculo que possuia: ").toUpperCase();
-	
+	boolean cadastrar() {
+		marca = JOptionPane.showInputDialog("Marca:");
+		cor = JOptionPane.showInputDialog("Cor:");
+		ano = Integer.parseInt(JOptionPane.showInputDialog("Ano:"));
+		return validaCadastro();
 	}
 	
-	String listaFabricacao() {
-		anoInicial = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano inicial que deseja pesquisar sobre os carros: "));
-		anoFinal = Integer.parseInt(JOptionPane.showInputDialog("Informe o ano final que deseja pesquisar sobre os carros: "));
-	
-		return listaFabricacao();
-		
-	}
-	void listaMarca() {
-		marcaVista = JOptionPane.showInputDialog("Informe a marca que deseja ver: ");
-	
-		
-	}
-	String listaCor() {
-		corVista = JOptionPane.showInputDialog("informe a cor que deseja ver: ");
-		
-		return listaCor();
+	boolean validaCadastro() {
+		if(marca.equals("")) {
+			JOptionPane.showMessageDialog(null, "Marca é obrigatório");
+			return false;
+		}
+		if(cor.equals("")) {
+			JOptionPane.showMessageDialog(null, "Cor é obrigatório");
+			return false;
+		}
+		if(ano < 1954 || ano > 2023) {
+			JOptionPane.showMessageDialog(null, "Ano inválido");
+			return false;
+		}
+		return true;
 	}
 	
-	String exibirDado() {
-		return marca + ", o ano " + anoFabricacao + " e a cor " + cor +".\n";
+	String exibir() {
+		return marca + " - " + cor + " - " + ano + "\n";
 	}
+
 }

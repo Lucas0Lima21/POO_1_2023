@@ -4,51 +4,89 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-/**if(anoInicial <= anoFabricacao &&  anoFinal >= anoFabricacao) {
-}
-	JOptionPane.showMessageDialog(null, anoFabricacao+", ");**/
-
-
 public class PrincipalCarro {
+	
 	public static void main(String[] args) {
-		ArrayList<CarroInicio>carro = new ArrayList<CarroInicio>();
+		ArrayList<CarroInicio> lista = new ArrayList<CarroInicio>();
 		
 		String menu = "1 - Cadastrar\n"
-				+"2 - Listar\n"
-				+"3 - Listar por fabricação"
-				+"4 - sair!";
-		
-		int op= 0;
-		
+				+ "2 - Buscar por ano de fabricação\n"
+				+ "3 - Buscar por marca\n"
+				+ "4 - Buscar por Cor\n\n"
+				+ "5 - Sair";
+		int op = 0;
 		do {
 			op = Integer.parseInt(JOptionPane.showInputDialog(menu));
 			
-			if( op == 1) {
+			if(op == 1) {
 				CarroInicio c = new CarroInicio();
-				c.cadastro();
-				carro.add(c);
+				if(c.cadastrar()) {
+					lista.add(c);
+				}
 			}
 			
-			if( op == 2) {
-				String result = "Lista de cadastro\n\n";
-				for(CarroInicio c: carro) {
-					result += c.exibirDado();
-
-				}
-				JOptionPane.showMessageDialog(null, result);
+			if(op == 2) {
+				buscaPorPeriodo(lista);
 			}
-			if( op == 3) {
-				String reesult = "Lista por cor\n\n";
-				for(CarroInicio c: carro) {
-					c.listaCor();
-					carro.add(c);
-					if(c.cor == c.corVista) {
-						reesult += c.exibirDado();
-				}
-				JOptionPane.showMessageDialog(null, reesult);
+			
+			if(op == 3) {
+				buscaPorMarca(lista);
 			}
+			
+			if(op == 4) {
+				buscaPorCor(lista);
 			}
-		}while(op != 4);
-	
+			
+		}while(op!=5);
 	}
+	
+	
+	static void buscaPorPeriodo(ArrayList<CarroInicio> lista) {
+		int anoI = Integer.parseInt(JOptionPane.showInputDialog("Ano Inicial:"));
+		int anoF = Integer.parseInt(JOptionPane.showInputDialog("Ano Final:"));
+		String dados = "";
+		int total = 0;
+		for( CarroInicio c : lista ) {
+			if(c.ano >= anoI && c.ano <= anoF) {
+				dados += c.exibir();
+				total ++;
+			}
+		}
+		dados += calcPercentual(lista.size(), total);
+		JOptionPane.showMessageDialog(null, dados);
+	}
+	static void buscaPorMarca(ArrayList<CarroInicio> lista) {
+		String marca = JOptionPane.showInputDialog("Marca:");
+		String dados = "";
+		int total = 0;
+		for( CarroInicio c : lista ) {
+			if(c.marca.equalsIgnoreCase(marca)) {
+				dados += c.exibir();
+				total ++;
+			}
+		}
+		dados += calcPercentual(lista.size(), total);
+		JOptionPane.showMessageDialog(null, dados);
+	}
+	
+	static void buscaPorCor(ArrayList<CarroInicio> lista) {
+		String cor = JOptionPane.showInputDialog("Cor:");
+		String dados = "";
+		int total = 0;
+		for( CarroInicio c : lista ) {
+			if(c.cor.equalsIgnoreCase(cor)) {
+				dados += c.exibir();
+				total ++;
+			}
+		}
+		dados += calcPercentual(lista.size(), total);
+		JOptionPane.showMessageDialog(null, dados);
+	}
+	
+	static String calcPercentual(int total, int encontrados) {
+		double perc = (double)encontrados / (double)total * 100;
+		return "Percentual em relação ao total: "+perc+"%";
+	}
+	
+
 }

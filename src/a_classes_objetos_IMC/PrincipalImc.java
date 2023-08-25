@@ -1,4 +1,4 @@
-package a_classes_objetos;
+package a_classes_objetos_IMC;
 
 import javax.swing.JOptionPane;
 

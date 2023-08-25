@@ -10,7 +10,7 @@ public class PrincipalImc2 {
 		
 		String menu = "1 - Cadastrar\n"
 				+"2 - Listar\n"
-				+"3 - sair";
+				+"3 - sair!";
 		
 		int op= 0;
 		

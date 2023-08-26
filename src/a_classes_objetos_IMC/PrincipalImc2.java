@@ -32,5 +32,6 @@ public class PrincipalImc2 {
 			}
 		}while(op != 3);
 	}
+	
 
 }

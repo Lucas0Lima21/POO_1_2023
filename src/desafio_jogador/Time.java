@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class time {
+public class Time {
 	private String nome;
 	private ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
 	
 	public void cadastrar() {
-		setNome(JOptionPane.showInputDialog("Nome time"));
+		setNome(JOptionPane.showInputDialog("Nome time: "));
 		String continua = "";
 		do {
 			Jogador j = new Jogador();
@@ -36,6 +36,13 @@ public class time {
 			}
 		}
 		return art;
+	}
+	
+	public int totalGols() {
+		int gols=0;
+		for(Jogador j: jogadores) {
+			gols += j.getGols();
+		}return gols;
 	}
 	
 	public String getNome() {

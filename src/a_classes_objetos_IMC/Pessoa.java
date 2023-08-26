@@ -53,6 +53,6 @@ public class Pessoa {
 	}
 	
 	String exibirDados() {
-		return nome + "-" + calculaImc() + "-" + avaliacao()+"\n";
+		return nome + ", resultado da avaliacao " + calculaImc() + "--" + avaliacao()+"\n";
 	}
 }

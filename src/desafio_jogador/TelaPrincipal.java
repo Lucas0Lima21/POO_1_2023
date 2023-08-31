@@ -25,7 +25,7 @@ public class TelaPrincipal {
 				
 			}
 			if (op == 2) {
-				String resultado = "Times cadastrados e seus jogadores:\n\n";
+				String resultado = "Times cadastrados e seus jogadores: \n\n";
 				for(Time t : times) {
 					resultado +=t.exibir();
 					
@@ -47,8 +47,9 @@ public class TelaPrincipal {
                     if (t.totalGols() > ti.totalGols()) {
                         ti = t;
                     }
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Time com mais gols: "+ti.getNome());
+                JOptionPane.showMessageDialog(null, "Time que fez mais gols: "+ti.getNome());
 			}
 		}while(op !=5); 
 		

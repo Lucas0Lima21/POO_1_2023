@@ -7,34 +7,49 @@ public class Autor {
 	private String sexo;
 	private int idade;
 	private String filho;
-	/*private int idFilho;*/
+	private int idFilho =1000;
 	
 	public void cadastrar() {
 		setNome(JOptionPane.showInputDialog("Informe nome e sobrenome do autor: "));
-		setSexo(JOptionPane.showInputDialog("Informe sexo: "));
+		setSexo(JOptionPane.showInputDialog("Informe sexo: masculino ou feminino "));
 		setIdade(Integer.parseInt(JOptionPane.showInputDialog("Informe idade: ")));
-		setFilho(JOptionPane.showInputDialog("Possui filho: Sim/Não"));
-		/*setIdFilho(Integer.parseInt(JOptionPane.showInputDialog("informe a idade do seu filho: ")));*/
-		/**String continua = "";
-		do {
-			
-	    	setFilho(JOptionPane.showInputDialog("Possui filho: Sim/Não"));
-	    	if(setFilho("sim")) {
-	    		idFilho = Integer.parseInt(JOptionPane.showInputDialog("informe a idade do seu filho: "));
-	    		continua = JOptionPane.showInputDialog("Desejar cadastrar outro filho: sim/nao ");
-	    	}else {
-	    		continua += filho;
-	    	}
-	    	
-	    }while(continua.equalsIgnoreCase("sim"));
-		**/
 		
-	}public String getNome() {
+		String continua = "";
+	
+			do {
+					
+				setFilho(JOptionPane.showInputDialog("Possui filho: Sim/Nao"));
+				continua = getFilho();
+					if(getFilho().equalsIgnoreCase("sim")) {
+						String filho = "";
+						do {
+							int iidade=Integer.parseInt(JOptionPane.showInputDialog("informe a idade do seu filho: "));								
+							if(iidade<=idFilho && iidade>0 && iidade<=getIdade()) {
+								idFilho = iidade;							
+								}else {
+									JOptionPane.showMessageDialog(null, "A idade é invalida, por ser numero negativo ou mais velho que o pai");
+								}
+								filho = JOptionPane.showInputDialog("Desejar cadrastar outro filho: sim/ nao");
+						}while(filho.equalsIgnoreCase("sim"));
+						continua = filho;
+						}	
+				
+	    	}while(continua.equalsIgnoreCase("sim"));
+		
+	}String exibir(){
+		return "autor " + getNome() + ", do sexo " + getSexo() +", que tem a idade de " + getIdade() + " anos, possui filho: "+ getFilho() +";\n";
+	}
+	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		String[] partesNome = nome.split(" ");
+        if (partesNome.length == 2) {
+            this.nome = nome;
+        } else {
+            JOptionPane.showMessageDialog(null, "O nome deve conter duas palavras (nome e sobrenome).");
+        }
 	}
 
 	public String getSexo() {
@@ -42,18 +57,23 @@ public class Autor {
 	}
 
 	public void setSexo(String sexo) {
-		if(this.sexo =="masculino" || this.sexo == "feminino") {
-		this.sexo = sexo;
-		}
+		if (sexo.equalsIgnoreCase("Masculino") || sexo.equalsIgnoreCase("Feminino")) {
+            this.sexo = sexo;
+        } else {
+            JOptionPane.showMessageDialog(null, "O sexo deve ser Masculino ou Feminino.");
+        }
 	}
-
 	public int getIdade() {
 		return idade;
 	}
 
 	public void setIdade(int idade) {
-		if(this.idade<0 && this.idade>120) {
+		if(idade>0 && idade<120) {
 		this.idade = idade;
+		
+		}else {
+			JOptionPane.showMessageDialog(null, "A idade esta invalida");
+
 		}
 	}
 
@@ -63,9 +83,10 @@ public class Autor {
 
 	public void setFilho(String filho) {
 		this.filho = filho;
+		
 	}
 
-	/**public int getIdFilho() {
+	public int getIdFilho() {
 		
 		return idFilho;
 	}
@@ -73,7 +94,10 @@ public class Autor {
 	public void setIdFilho(int idFilho) {
 		if(this.idFilho >=0 && this.idFilho <=100) {
 		this.idFilho = idFilho;
+		}else {
+			JOptionPane.showMessageDialog(null, "A idade esta invalida");
+
 		}
-	}**/
+	}
 	
 }

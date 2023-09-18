@@ -75,7 +75,7 @@ public class TelaPrincipal {
 				}
 			}
 			if (op == 6) {
-				String nome = JOptionPane.showInputDialog(null, "Informe o sexo do autor: ");
+				String nome = JOptionPane.showInputDialog(null, "Informe o genero do autor: ");
 
 				for (Livro A : livros) {
 			        for (Autor autor : A.getAutores()) {

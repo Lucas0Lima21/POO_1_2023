@@ -4,31 +4,33 @@ import javax.swing.JOptionPane;
 
 public class Professor {
 	private String nome;
-	private String formaGradu;//graduação
-	private String formaEspecia;//especialização
-	private String formaPos;
+	private String formacao;
+	private String materia;
+	private int nu;
 	
-	public void cadrastar() {
-		setNome(JOptionPane.showInputDialog("Infome o nome do professor: ").toUpperCase());
-		setFormaGradu(JOptionPane.showInputDialog("O professor possui graduacao, se sim, informe a seguir:"));
-		String continuar;
+	public Professor (){
+		cadastraP();
 		
-		do {
-			continuar= (JOptionPane.showInputDialog("O professor possui especialização: sim/nao"));
-			if(continuar.equalsIgnoreCase("sim"));{
-				setFormaEspecia(JOptionPane.showInputDialog("Qual é especializacao: "));
-			}
-			
-			continuar= (JOptionPane.showInputDialog("O professor possui Pós graduacao: sim/nao"));
-			if(continuar.equalsIgnoreCase("sim"));{
-				setFormaEspecia(JOptionPane.showInputDialog("Qual é especializacao: "));
-				
-				continuar ="nao";
-			}
-			JOptionPane.showMessageDialog(null, "você precisa ''digitar'' nao para sair da pag de cadastro do professor.");
-			
-		}while(continuar.equalsIgnoreCase("nao"));
+	}
+	
+	public void cadastraP() {
+		setNome(JOptionPane.showInputDialog(null, "Informe o nome do professor"));
+		JOptionPane.showMessageDialog(null, "Formações: " + "\n\n1- Graduação" + "\n2- Especialização" + "\n3- Pós Graduação");
+		setNu (Integer.parseInt(JOptionPane.showInputDialog(null, "Informe sua formação: 1/ 2/ 3")));
 		
+		if (nu == 1){
+			setFormacao ("Graduação");
+			setMateria (JOptionPane.showInputDialog(null, "Informe a matéria da " + getFormacao()));
+		} else if (nu == 2){
+			setFormacao ("Especialização");
+			setMateria (JOptionPane.showInputDialog(null, "Informe a matéria da " + getFormacao()));
+		} else if (nu == 3){
+			setFormacao ("Pós Graduação");
+			setMateria (JOptionPane.showInputDialog(null, "Informe a matéria da " + getFormacao()));
+		}
+	}
+	public String exibirDados() {
+		return getNome()+"("+getFormacao()+")";
 	}
 
 	public String getNome() {
@@ -39,44 +41,40 @@ public class Professor {
 		if(nome!="") {
 			this.nome = nome;
 		}else {
-			setNome(JOptionPane.showInputDialog("voce precisa informa um nome.Digite aqui: "));
+			setNome(JOptionPane.showInputDialog("É nescessário informar o nome!"));
 		}
 	}
 
-	public String getFormaGradu() {
-		return formaGradu;
+	public String getFormacao() {
+		return formacao;
 	}
 
-	public void setFormaGradu(String formaGradu) {
-		if(formaGradu!="") {
-			this.formaGradu = formaGradu;
+	public void setFormacao(String formacao) {
+		this.formacao = formacao;
+	}
+
+	public String getMateria() {
+		return materia;
+	}
+
+	public void setMateria(String materia) {
+		if (materia!="") {
+		this.materia = materia;
+		} else {
+			setMateria(JOptionPane.showInputDialog(null, "Informe a matéria correspondente a formação!"));
+		}
+	}
+
+	public int getN() {
+		return nu;
+	}
+
+	public void setNu(int nu) {
+		if(nu >= 1 && nu <=3) {
+			this.nu = nu;
 		}else {
-			setFormaGradu(JOptionPane.showInputDialog("Deve infomar se o nome da graduação que possuir: "));
+			setNu (Integer.parseInt(JOptionPane.showInputDialog("Informe um número correspondente! (1/2/3)")));
 		}
 	}
-
-	public String getFormaEspecia() {
-		return formaEspecia;
-	}
-
-	public void setFormaEspecia(String formaEspecia) {
-		if(formaGradu!="") {
-			this.formaEspecia = formaEspecia;		
-		}else {
-			setFormaEspecia(JOptionPane.showInputDialog("Deve infomar se o nome da especializacao que possuir: "));
-		}
-	}
-
-	public String getFormaPos() {
-		return formaPos;
-	}
-
-	public void setFormaPos(String formaPos) {
-		if(formaGradu!="") {
-			this.formaPos = formaPos;		
-		}else {
-			setFormaPos(JOptionPane.showInputDialog("Deve infomar se o nome da Pos graduacao que possuir: "));
-		}
-	}
-
+		
 }

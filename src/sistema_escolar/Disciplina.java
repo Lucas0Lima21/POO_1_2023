@@ -6,52 +6,59 @@ import javax.swing.JOptionPane;
 
 public class Disciplina {
 	private String nome;
-	private double horas;//carga horaria
-	private ArrayList<Professor> prof = new ArrayList<Professor>();
-	//*private ArrayList<Aluno> aluno = new ArrayList<Aluno>();
+	private double cargaHoras;
+	private Professor professor;
 
-	public void cadastrar() {
+	public void cadastrar(ArrayList<Professor> prof ) {
 		setNome(JOptionPane.showInputDialog("Informe o nome da disciplina: "));
-		setHoras(Double.parseDouble(JOptionPane.showInputDialog("infome a quantidade de carga horaria da materia: ")));
-		Professor p = new Professor();
-		p.cadrastar();
-		prof.add(p);
+		setCargaHoras(Double.parseDouble(JOptionPane.showInputDialog("infome a quantidade de carga horaria da materia: ")));
+		
+		String menuProf = "";
+		int cont = 1;  
+		for (Professor p : prof) {
+		menuProf += cont + " - " + p.exibirDados()+"\n";
+			cont ++;
+		}
+		int escolhaProf = Integer.parseInt(JOptionPane.showInputDialog(menuProf));
+		setProfessor(prof.get(escolhaProf - 1));
 	}
-	/*public Aluno AdicionarAluno() {
-		Aluno a = new Aluno();
-		if(a.getDisciplina()== getNome() ) {
-		aluno.add(a);
-		}return a;*/
 	
-	String exibirMat(){
-	return "materia " + getNome()  +";\n";
+	public String exibirDados() {
+		return getNome()+"("+getCargaHoras()+ ") - " + getProfessor().exibirDados();
+	}
+	
+	public String exibirMat(){
+	return getNome()  +";\n";
 	}
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
-		if(nome!="") {
+		if(nome.equals("")) {
+			setNome(JOptionPane.showInputDialog("voce precisa informa um nome. Digite aqui: "));
+
+		}else {
 			this.nome = nome;
-		}else {
-			setNome(JOptionPane.showInputDialog("voce precisa informa um nome.Digite aqui: "));
 		}
 	}
-	public double getHoras() {
-		return horas;
+	public double getCargaHoras() {
+		return cargaHoras;
 	}
-	public void setHoras(double horas) {
-		if(horas < 0) {
-			this.horas = horas;			
+	public void setCargaHoras(double cargaHoras) {
+		if(cargaHoras > 0) {
+			this.cargaHoras = cargaHoras;			
 		}else {
-			setHoras(Double.parseDouble(JOptionPane.showInputDialog("voce deve informa a carga horaria maior que 0. Digite aqui: ")));
+			setCargaHoras(Double.parseDouble(JOptionPane.showInputDialog("voce deve informa a carga horaria maior que 0. Digite aqui: ")));
 		}
 	}
-	public ArrayList<Professor> getProf() {
-		return prof;
+	public Professor getProfessor() {
+		return professor;
 	}
-	public void setProf(ArrayList<Professor> prof) {
-		this.prof = prof;
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
+
 	
 
 

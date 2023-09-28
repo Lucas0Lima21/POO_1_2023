@@ -6,30 +6,23 @@ import javax.swing.JOptionPane;
 
 public class Aluno {
 	private String nome;
-	private double notas;
-	private ArrayList<Disciplina> disc = new ArrayList<Disciplina>();
-
-	public void cadastrar() {
-		setNome(JOptionPane.showInputDialog("Informe o Nome do aluno: "));
-		String continuar;
-
-		do {
-			continuar= (JOptionPane.showInputDialog("Deseja cadrastar o aluno em uma disciplina: sim/nao"));
-			if(continuar.equalsIgnoreCase("sim"));{
-				Disciplina d = new Disciplina();
-				String materia= JOptionPane.showInputDialog("Disciplina cadrastada:\n " + d.exibirMat() + "\nInforme a materia"
-						+ " que deseja se cadrastar: ");
-				if(d.getNome().equalsIgnoreCase(materia)) {
-				disc.add(d);
-				
-				}
-			}
-			JOptionPane.showMessageDialog(null, "você precisa digitar ''nao'' para sair da pag de cadastro do aluno.");
+	private ArrayList<Disciplina> discMatriculadas = new ArrayList<Disciplina>();
+	private ArrayList<Nota> notas = new ArrayList<Nota>();
+	
+	public void cadastra() {
+		setNome(JOptionPane.showInputDialog("Nome do aluno"));
+	}
+	public double mediaNotas() {
+		double media = 0;
+		for (Nota n : notas) {
 			
-		}while(continuar.equalsIgnoreCase("nao"));
-		
+			media=((n.getN1() + n.getN2() + n.getN3())/3);
+		}return media;
 	}
 	
+	public String exibirMedia() {
+		return getDiscMatriculadas()+": "+ mediaNotas()+";\n";
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -37,15 +30,19 @@ public class Aluno {
 		if(nome!="") {
 			this.nome = nome;
 		}else {
-			setNome(JOptionPane.showInputDialog("voce precisa informa um nome.Digite aqui: "));
-		}
+			setNome(JOptionPane.showInputDialog("É nescessário informar o nome.\nInforme o nome do aluno: "));
+		}	}
+	public ArrayList<Disciplina> getDiscMatriculadas() {
+		return discMatriculadas;
 	}
-	public double getNotas() {
+	public void setDiscMatriculadas(ArrayList<Disciplina> discMatriculadas) {
+		this.discMatriculadas = discMatriculadas;
+	}
+	public ArrayList<Nota> getNotas() {
 		return notas;
 	}
-	public void setNotas(double notas) {
+	public void setNotas(ArrayList<Nota> notas) {
 		this.notas = notas;
 	}
-	
 
 }

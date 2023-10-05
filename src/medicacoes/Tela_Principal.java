@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class Tela_Principal {
     private static ArrayList<Medicamento> medicamentos = new ArrayList<>();
     private static ArrayList<Pessoa> pessoas = new ArrayList<>();
-    private static ArrayList<Prescricao> prescricoes = new ArrayList<>(); // Lista para armazenar as prescrições
+    private static ArrayList<Prescricao> prescricoes = new ArrayList<>(); 
 
     public static void main(String[] args) {
         int op = 0;
@@ -61,25 +61,21 @@ public class Tela_Principal {
         } else if (hasContraindications) {
             JOptionPane.showMessageDialog(null, "A pessoa possui contraindicações para este medicamento.");
         } else {
-            // If both conditions are met, create a prescription
             Prescricao prescricao = new Prescricao(pessoa, medicamento);
             prescricoes.add(prescricao);
             JOptionPane.showMessageDialog(null, "Prescrição criada com sucesso!");
 
-            // Optional: Display prescription details here if needed.
         }
     }
 
     private static boolean verificarIndicacao(Pessoa pessoa, Medicamento medicamento) {
-        // Implement logic to check if the person's symptom is indicated by the medication.
-        // Return true if indicated, false otherwise.
-        return true; // Example: Always return true for demonstration.
+       
+        return true; 
     }
 
     private static boolean verificarContraindicacoes(Pessoa pessoa, Medicamento medicamento) {
-        // Implement logic to check if the person has any contraindications for the medication.
-        // Return true if there are contraindications, false otherwise.
-        return false; // Example: Always return false for demonstration.
+        
+        return false; 
     }
 
     private static void listarTodasPessoasComMedicamentos() {
@@ -88,7 +84,6 @@ public class Tela_Principal {
         for (Pessoa pessoa : pessoas) {
             listaPessoasComMedicamentos.append("Nome da Pessoa: ").append(pessoa.getNome()).append("\n");
 
-            // Verificar se a pessoa tem algum medicamento associado
             boolean possuiMedicamento = false;
             for (Prescricao prescricao : prescricoes) {
                 if (prescricao.getPessoa() == pessoa) {

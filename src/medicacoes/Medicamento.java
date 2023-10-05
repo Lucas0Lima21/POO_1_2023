@@ -11,6 +11,12 @@ public class Medicamento {
 	private String aplicacao;
 	private int nu;
 	private ArrayList<Contraindicacao> contraI = new ArrayList<Contraindicacao>();
+	private ArrayList<Indicacao> indicacao = new ArrayList<Indicacao>();
+
+	public Medicamento() {
+		contraI = new ArrayList<>();
+		cadastrar();
+	}
 
 	public void cadastrar() {
 		setNome(JOptionPane.showInputDialog("Informe nome do medicamento: "));
@@ -24,6 +30,14 @@ public class Medicamento {
 		}else if (nu == 3){
 			setAplicacao("Oral");
 		}
+		String continuaa = "";
+		do {
+			Indicacao i = new Indicacao();
+			i.cadastrarInd();
+			indicacao.add(i);
+			continuaa = JOptionPane
+					.showInputDialog("Deseja colocar mais INDICAÇAO: Sim/Nao");
+		}while(continuaa.equalsIgnoreCase("Sim"));
 		
 		String continua = "";
 		do {

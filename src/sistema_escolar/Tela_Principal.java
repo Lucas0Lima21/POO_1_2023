@@ -109,6 +109,6 @@ public class Tela_Principal {
 			        }
 			    }
 			    JOptionPane.showMessageDialog(null, discPosGraduacao.toString());
-			}
+		}
 
 }
